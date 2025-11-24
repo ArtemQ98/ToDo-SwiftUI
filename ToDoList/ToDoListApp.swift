@@ -7,11 +7,21 @@
 
 import SwiftUI
 
+/**
+ MVVM - arch
+ 
+ **/
+
 @main
 struct ToDoListApp: App {
+    @StateObject var listViewModel: ListViewModel = ListViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack{
+                ListView()
+            }
+            .environmentObject(listViewModel)
+            .environment(\.locale, Locale(identifier: "ru_RU"))
         }
     }
 }
