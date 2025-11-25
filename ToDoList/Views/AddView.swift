@@ -62,7 +62,7 @@ struct AddView: View {
 
 #Preview {
     
-    NavigationStack {
+    NavigationView {
         AddView()
     }
     .environmentObject(ListViewModel())

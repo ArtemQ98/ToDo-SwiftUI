@@ -61,7 +61,7 @@ struct NoItemsView: View {
 }
 
 #Preview {
-    NavigationStack {
+    NavigationView {
         NoItemsView()
             .navigationTitle("Title")
     }

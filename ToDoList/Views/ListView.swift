@@ -20,42 +20,51 @@ struct ListView: View {
             else{
                 List {
                     ForEach(listViewModel.items){ item in
-                        ListRowView(item: item)
-                            .onTapGesture {
-                                withAnimation(.linear){
-                                    listViewModel.updateItem(item: item)
+                        HStack{
+                            ListRowView(item: item)
+                                .onTapGesture {
+                                    withAnimation(.linear){
+                                        listViewModel.updateItem(item: item)
+                                    }
                                 }
-                            }
+                        }
                     }
                     .onDelete(perform: listViewModel.deleteItem)
                     .onMove(perform: listViewModel.moveItem)
+                    
+
                 }
+                .listStyle(.insetGrouped)
             }
         }
         .navigationTitle("Список задач 📝")
-        .toolbar{
-            ToolbarItem(placement: .navigationBarLeading) {
-                EditButton()
-            }
-            
-            ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink("Добавить", destination: AddView())
-            }
-        }
-        .navigationViewStyle(.stack)
+        .navigationBarItems(
+            leading: EditButton(),
+            trailing: NavigationLink("Добавить", destination: AddView()))
+//        .toolbar{
+//            ToolbarItem(placement: .navigationBarLeading) {
+//                EditButton()
+//            }
+//            
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                NavigationLink("Добавить", destination: AddView())
+//            }
+//        }
+        
+        
+        
 //        .navigationBarItems(
 //            leading: EditButton().navigationTitle("Редактировать"),
 //            trailing:
 //                NavigationLink("Добавить", destination: AddView())
 //            )
     }
-    
-    
-    
 }
 
+
+
 #Preview {
-    NavigationStack{
+    NavigationView{
         ListView()
     }
     .environmentObject(ListViewModel())
